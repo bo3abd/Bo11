@@ -32,22 +32,13 @@ console.log(`[M] ${client.users.size}`)
 
 
 
-
-
-
-
-
-
-
-
-
-
 client.on('guildMemberAdd',async member => {
-  const Canvas = require('canvas');
-  const jimp = require('jimp');
-  const w = ['./welcome_4.png'];
+
+var Canvas = require("canvas-prebuilt")
+  var jimp = require('jimp');
+  const w = ['./w1.png'];
         let Image = Canvas.Image,
-            canvas = new Canvas(800, 300),
+             canvas = new Canvas(800, 300),
             ctx = canvas.getContext('2d');
         ctx.patternQuality = 'bilinear';
         ctx.filter = 'bilinear';
@@ -77,13 +68,11 @@ client.on('guildMemberAdd',async member => {
           ctx.fontSize = '72px';
           ctx.fillStyle = "#ffffff";
           ctx.textAlign = "center";
-          ctx.fillText(member.user.username, 545, 177);
+          ctx.fillText(member.user.username, 380, 177);
          
-          ctx.font = '16px Arial Bold';
-          ctx.fontSize = '72px';
-          ctx.fillStyle = "#ffffff";
-          ctx.textAlign = "center";
-          ctx.fillText(`${member.guild.memberCount} Members`, 580, 200);
+
+         
+         
          
           let Avatar = Canvas.Image;
           let ava = new Avatar;
@@ -100,6 +89,15 @@ client.on('guildMemberAdd',async member => {
 });
 });
 });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -146,7 +144,88 @@ if (message.content.startsWith(adminprefix + 'setT')) {
 
 
 
+client.on('message', async message => {
+  if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
 
+  let args = message.content.split(" ");
+  let command = args[0];
+
+  if(message.content.startsWith("مسح")) {
+    if(!message.member.hasPermission("MANAGEP_MESSAGES")) return message.reply('**انت لا تملك الخصائص الكافية.**').then(msg => {
+      msg.delete(3500);
+      message.delete(3500);
+    });
+
+    if(!args[1]) {
+      var stop = true;
+      var msg = parseInt(100);
+
+      stop = false;
+      setTimeout(() => {
+        stop = true;
+      },3005);
+      setInterval(() => {
+        if(stop === true) return;
+        message.channel.fetchMessages({
+          limit: msg
+        }).then(m => {
+          message.channel.bulkDelete(msg).then(() => {
+            message.channel.send(`${message.author},\n\`\`\`تم مسح الرسائل بنجاح\`\`\``).then(msg => {
+              msg.delete(3000);
+            });
+          });
+        });
+      },1000);
+    } else if(args[1]) {
+      if(args[1] <= 100) {
+          message.channel.fetchMessages({
+              limit: msg
+          }).then(m => {
+              message.channel.bulkDelete(m).then(() => {
+                  message.channel.send(`${message.author},\n\`\`\`تم مسح الرسائل بنجاح\`\`\``).then(msg => {
+              msg.delete(3000);
+                  });
+              });
+          });
+      } else if(args[1] <= 200) {
+        stop = true;
+        setTimeout(() => {
+          stop = false;
+        },2001);
+        setInterval(() => {
+          if(stop === true) return;
+          message.channel.fetchMessages({
+            limit: msg
+          }).then(m => {
+            message.channel.bulkDelete(m).then(() => {
+                message.channel.send(`${message.author},\n\`\`\`تم مسح الرسائل بنجاح\`\`\``).then(msg => {
+              msg.delete(3000);
+                  });
+            });
+          });
+        },1000);
+      } else if(args[1] <= 300) {
+        stop = true;
+        setTimeout(() => {
+          stop = false;
+        },2001);
+        setInterval(() => {
+          if(stop === true) return;
+          message.channel.fetchMessages({
+            limit: msg
+          }).then(m => {
+            message.channel.bulkDelete(m).then(() => {
+            message.channel.send(`${message.author},\n\`\`\`تم مسح الرسائل بنجاح\`\`\``).then(msg => {
+              msg.delete(3000);
+                  });
+            });
+          });
+        });
+      }
+    }
+  }
+});
  
    
    
