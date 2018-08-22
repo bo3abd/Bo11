@@ -35,20 +35,6 @@ console.log(`[M] ${client.users.size}`)
 
 
 
-  client.on('typingStart', (ch, user) => {
-    if(user.presence.status === 'offline') {
-        
-        ch.send(`${user} هاهاهاا , كشفتك وانت تكتب ي اوف لاين`)
-        .then(msg => {
-            msg.delete(10000)
-        })
-    }
-})
-  
-
-
-
-
 
 
 
@@ -225,9 +211,6 @@ var Canvas = require("canvas-prebuilt")
 
 
 
-
-const Discord = require("discord.js");
-const client = new Discord.Client();
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
