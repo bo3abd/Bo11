@@ -33,6 +33,36 @@ console.log(`[M] ${client.users.size}`)
 
 
 
+
+
+  client.on('typingStart', (ch, user) => {
+    if(user.presence.status === 'offline') {
+        
+        ch.send(`${user} هاهاهاا , كشفتك وانت تكتب ي اوف لاين`)
+        .then(msg => {
+            msg.delete(10000)
+        })
+    }
+})
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 client.on('voiceStateUpdate', (oldM, newM) => {
   let rebel1 = oldM.serverMute;
   let rebel2 = newM.serverMute;
